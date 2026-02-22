@@ -29,3 +29,10 @@ class Inventario:
 
         # Al iniciar el sistema, se carga el archivo automáticamente
         self.cargar_desde_archivo()
+
+    # -------- Métodos internos --------
+    def _buscar_indice_por_id(self, producto_id: int) -> int:    #Devuelve el índice del producto o -1 si no existe.
+        for i, producto in enumerate(self.__productos):
+            if producto.get_id() == producto_id:
+                return i
+        return -1
