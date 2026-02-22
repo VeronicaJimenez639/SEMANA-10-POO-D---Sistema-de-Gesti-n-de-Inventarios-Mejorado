@@ -49,3 +49,24 @@ class Producto:
     
     def get_precio(self) -> float:
         return self.__precio     #Retorna el precio unitario del producto.
+    
+        # -------- Setters con validación --------
+    def set_id(self, producto_id: int) -> None:                    
+        if not isinstance(producto_id, int) or producto_id <= 0:   
+            raise ValueError("El ID debe ser un entero positivo.")  # Si el ID no es un entero positivo, se lanza una excepción.
+        self.__id = producto_id
+
+    def set_nombre(self, nombre: str) -> None:
+        if not isinstance(nombre, str) or not nombre.strip():   # Si el nombre no es una cadena o está vacía, se lanza una excepción.
+            raise ValueError("El nombre no puede estar vacío.")    
+        self.__nombre = nombre.strip()
+
+    def set_cantidad(self, cantidad: int) -> None:
+        if not isinstance(cantidad, int) or cantidad < 0:       #Asigna la cantidad. Debe ser un entero >= 0.
+            raise ValueError("La cantidad debe ser >= 0.")
+        self.__cantidad = cantidad
+
+    def set_precio(self, precio: float) -> None:
+        if not isinstance(precio, (int, float)) or float(precio) < 0: #Asigna el precio. Debe ser un número >= 0.
+            raise ValueError("El precio debe ser >= 0.")
+        self.__precio = float(precio)
