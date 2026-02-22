@@ -34,3 +34,16 @@ def leer_texto(mensaje: str) -> str:   #Lee un texto no vacío desde consola.
         if texto:
             return texto
         print("El texto no puede estar vacío.")
+
+# -------- Menú principal --------
+
+def mostrar_menu() -> None:    #Muestra el menú de opciones en consola.
+    print("\n" + "=" * 40)
+    print("ALMACÉN APP - INVENTARIO")
+    print("=" * 40)
+    print("1) Añadir producto")
+    print("2) Eliminar producto")
+    print("3) Actualizar producto")
+    print("4) Buscar producto por ID")
+    print("5) Listar inventario")
+    print("6) Salir")
