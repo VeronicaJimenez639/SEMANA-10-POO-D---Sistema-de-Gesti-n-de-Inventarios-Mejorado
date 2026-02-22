@@ -109,4 +109,15 @@ class Inventario:
         self.__productos.append(producto)  
         self.guardar_en_archivo()
         print("Producto agregado.")
-        return True                 
+        return True
+
+    def eliminar_producto(self, producto_id: int) -> bool:  #Elimina por ID y guarda cambios en archivo.
+        indice = self._buscar_indice_por_id(producto_id)
+        if indice == -1:
+            print("No existe producto con ese ID.")
+            return False
+
+        self.__productos.pop(indice)
+        self.guardar_en_archivo()
+        print("Producto eliminado.")
+        return True                
