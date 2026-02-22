@@ -49,3 +49,9 @@ class Inventario:
 
     def _producto_a_linea(self, producto: Producto) -> str:   #Convierte un Producto a una línea TXT.
         return producto.to_linea()
+    
+    def _linea_a_producto(self, linea: str) -> Optional[Producto]: #Convierte una línea del archivo a un objeto Producto. Si la línea es corrupta, devuelve None.
+        try:
+            return Producto.from_linea(linea)
+        except Exception:
+            return None  
