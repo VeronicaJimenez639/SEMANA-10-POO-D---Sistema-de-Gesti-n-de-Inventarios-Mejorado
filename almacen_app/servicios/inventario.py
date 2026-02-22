@@ -82,3 +82,20 @@ class Inventario:
             print("Sin permisos para leer el archivo.")
         except Exception as e:
             print(f"Error al cargar archivo: {e}") 
+
+    def guardar_en_archivo(self) -> bool:      #Sobrescribe el archivo con el estado actual. Devuelve True si se guardó correctamente, False si hubo un error.
+        try:
+            self.asegurar_archivo()
+
+            with open(self.ruta_archivo, "w", encoding="utf-8") as f:
+                for p in self.__productos:
+                    f.write(self._producto_a_linea(p) + "\n")
+
+            return True
+
+        except PermissionError:
+            print("Sin permisos para escribir en el archivo.")
+            return False
+        except Exception as e:
+            print(f"Error al guardar archivo: {e}")
+            return False
