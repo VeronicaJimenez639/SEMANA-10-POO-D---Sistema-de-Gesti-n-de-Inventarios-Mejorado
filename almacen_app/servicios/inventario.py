@@ -36,3 +36,13 @@ class Inventario:
             if producto.get_id() == producto_id:
                 return i
         return -1
+    
+    def asegurar_archivo(self) -> None:                #Garantiza que carpeta y archivo existan.
+        carpeta = os.path.dirname(self.ruta_archivo)
+
+        if not os.path.exists(carpeta):          #Si la carpeta no existe, se crea automáticamente. Esto evita errores al intentar escribir en un archivo dentro de una carpeta inexistente.
+            os.makedirs(carpeta, exist_ok=True)
+
+        if not os.path.exists(self.ruta_archivo):
+            with open(self.ruta_archivo, "w", encoding="utf-8"):
+                pass
