@@ -139,3 +139,7 @@ class Inventario:
         self.guardar_en_archivo()
         print("Producto actualizado.")
         return True                
+
+    def buscar_por_id(self, producto_id: int) -> Optional[Producto]: #Retorna el producto por ID o None si no existe.
+        indice = self._buscar_indice_por_id(producto_id)
+        return None if indice == -1 else self.__productos[indice]
