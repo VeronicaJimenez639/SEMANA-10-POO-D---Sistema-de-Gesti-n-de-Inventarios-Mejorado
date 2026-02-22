@@ -120,4 +120,22 @@ class Inventario:
         self.__productos.pop(indice)
         self.guardar_en_archivo()
         print("Producto eliminado.")
+        return True
+
+    def actualizar_producto(self, producto_id: int, nueva_cantidad=None, nuevo_precio=None) -> bool:  #Actualiza cantidad y/o precio por ID y guarda en archivo.
+        indice = self._buscar_indice_por_id(producto_id)
+        if indice == -1:
+            print("No existe producto con ese ID.")
+            return False
+
+        producto = self.__productos[indice]
+
+        if nueva_cantidad is not None:
+            producto.set_cantidad(nueva_cantidad)
+
+        if nuevo_precio is not None:
+            producto.set_precio(nuevo_precio)
+
+        self.guardar_en_archivo()
+        print("Producto actualizado.")
         return True                
