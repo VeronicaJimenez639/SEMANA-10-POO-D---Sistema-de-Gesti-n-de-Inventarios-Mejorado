@@ -99,3 +99,14 @@ class Inventario:
         except Exception as e:
             print(f"Error al guardar archivo: {e}")
             return False
+        
+    # -------- Métodos de gestión de productos (CRUD) (Create, Read, Update, Delate)--------
+    def agregar_producto(self, producto: Producto) -> bool:      #Agrega un producto si el ID no existe y guarda en archivo. 
+        if self._buscar_indice_por_id(producto.get_id()) != -1:  
+            print("El ID ya existe.")
+            return False
+
+        self.__productos.append(producto)  
+        self.guardar_en_archivo()
+        print("Producto agregado.")
+        return True                 
