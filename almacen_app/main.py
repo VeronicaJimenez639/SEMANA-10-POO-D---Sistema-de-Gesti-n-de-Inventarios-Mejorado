@@ -96,4 +96,4 @@ def main() -> None:             #Punto de entrada: bucle principal del menú y l
             print("Opción inválida.")
 
 if __name__ == "__main__":  
-    main()
+    main() 
