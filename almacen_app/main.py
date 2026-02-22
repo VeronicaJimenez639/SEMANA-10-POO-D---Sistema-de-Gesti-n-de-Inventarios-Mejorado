@@ -27,3 +27,10 @@ def leer_float(mensaje: str, minimo=None) -> float:  #Lee un float desde consola
             return valor
         except ValueError:
             print("Ingresa un número decimal válido.")
+
+def leer_texto(mensaje: str) -> str:   #Lee un texto no vacío desde consola.
+    while True:
+        texto = input(mensaje).strip()
+        if texto:
+            return texto
+        print("El texto no puede estar vacío.")
