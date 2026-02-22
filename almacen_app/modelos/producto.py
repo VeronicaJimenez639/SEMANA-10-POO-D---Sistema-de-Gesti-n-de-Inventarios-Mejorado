@@ -36,3 +36,16 @@ class Producto:
         self.set_nombre(nombre)
         self.set_cantidad(cantidad)
         self.set_precio(precio)
+
+    # -------- Getters (lectura controlada de atributos privados) --------
+    def get_id(self) -> int:
+        return self.__id      #Retorna el identificador único del producto.
+
+    def get_nombre(self) -> str:
+        return self.__nombre    #Retorna el nombre del producto.
+
+    def get_cantidad(self) -> int:
+        return self.__cantidad   #Retorna la cantidad disponible.
+    
+    def get_precio(self) -> float:
+        return self.__precio     #Retorna el precio unitario del producto.
