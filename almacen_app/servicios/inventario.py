@@ -54,4 +54,31 @@ class Inventario:
         try:
             return Producto.from_linea(linea)
         except Exception:
-            return None  
+            return None 
+
+    # -------- Persistencia --------
+    def cargar_desde_archivo(self) -> None:  #Reconstruye la lista desde el archivo.
+        try:
+            self.asegurar_archivo()
+            self.__productos.clear()
+
+            with open(self.ruta_archivo, "r", encoding="utf-8") as f:  #Se lee el archivo línea por línea para reconstruir los objetos Producto. Si el archivo no existe, se crea automáticamente. Si el archivo está vacío, simplemente no se agregan productos a la lista.
+                for linea in f:
+                    linea = linea.strip()
+                    if not linea:
+                        continue
+
+                    producto = self._linea_a_producto(linea)   #Si la línea es válida, se agrega el producto a la lista. Si la línea está corrupta, se ignora y se continúa con la siguiente línea.
+                    if producto:
+                        idx = self._buscar_indice_por_id(producto.get_id())
+                        if idx != -1:
+                            self.__productos[idx] = producto
+                        else:
+                            self.__productos.append(producto)
+
+            print("Inventario cargado correctamente.")
+
+        except PermissionError:                              #Si no se tienen permisos para leer el archivo, se muestra un mensaje de error específico.
+            print("Sin permisos para leer el archivo.")
+        except Exception as e:
+            print(f"Error al cargar archivo: {e}") 
