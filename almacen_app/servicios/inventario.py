@@ -46,3 +46,6 @@ class Inventario:
         if not os.path.exists(self.ruta_archivo):
             with open(self.ruta_archivo, "w", encoding="utf-8"):
                 pass
+
+    def _producto_a_linea(self, producto: Producto) -> str:   #Convierte un Producto a una línea TXT.
+        return producto.to_linea()
