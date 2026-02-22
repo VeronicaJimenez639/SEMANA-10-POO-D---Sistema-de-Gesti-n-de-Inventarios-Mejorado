@@ -70,3 +70,29 @@ class Producto:
         if not isinstance(precio, (int, float)) or float(precio) < 0: #Asigna el precio. Debe ser un número >= 0.
             raise ValueError("El precio debe ser >= 0.")
         self.__precio = float(precio)
+
+    # -------- Conversión para persistencia --------
+    def to_linea(self) -> str:                                             #Convierte el objeto a una línea de texto para el archivo.
+        nombre_seguro = self.get_nombre().replace(self.SEPARADOR, "/")
+        return f"{self.get_id()}|{nombre_seguro}|{self.get_cantidad()}|{self.get_precio()}"
+
+    @classmethod
+    def from_linea(cls, linea: str) -> "Producto":           #Crea un Producto a partir de una línea del archivo.
+        partes = linea.strip().split(cls.SEPARADOR)
+        if len(partes) != 4:
+            raise ValueError("Línea inválida en archivo.")
+
+        return cls(
+            int(partes[0]),
+            partes[1],
+            int(partes[2]),
+            float(partes[3])
+        )
+
+    def __str__(self) -> str:             #Representación legible del producto para mostrar en consola.
+        return (
+            f"ID: {self.get_id()} | "
+            f"Nombre: {self.get_nombre()} | "
+            f"Cantidad: {self.get_cantidad()} | "
+            f"Precio: ${self.get_precio():.2f}"
+        )
