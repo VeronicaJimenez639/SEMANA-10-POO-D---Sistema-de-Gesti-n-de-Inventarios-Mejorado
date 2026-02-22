@@ -47,3 +47,50 @@ def mostrar_menu() -> None:    #Muestra el menú de opciones en consola.
     print("4) Buscar producto por ID")
     print("5) Listar inventario")
     print("6) Salir")
+
+def main() -> None:             #Punto de entrada: bucle principal del menú y llamadas al servicio Inventario.
+    inventario = Inventario()
+
+    while True:
+        mostrar_menu()
+        opcion = leer_int("Elige opción: ", minimo=1)
+
+        if opcion == 1:
+            try:
+                producto = Producto(
+                    leer_int("ID: ", minimo=1),
+                    leer_texto("Nombre: "),
+                    leer_int("Cantidad: ", minimo=0),
+                    leer_float("Precio: ", minimo=0.0)
+                )
+                inventario.agregar_producto(producto)
+            except ValueError as e:
+                print(f"Error: {e}")
+
+        elif opcion == 2:
+            inventario.eliminar_producto(leer_int("ID: ", minimo=1))
+
+        elif opcion == 3:
+            producto_id = leer_int("ID: ", minimo=1)
+            nueva_cantidad = leer_int("Nueva cantidad: ", minimo=0)
+            nuevo_precio = leer_float("Nuevo precio: ", minimo=0.0)
+            inventario.actualizar_producto(producto_id, nueva_cantidad, nuevo_precio)
+
+        elif opcion == 4:
+            producto = inventario.buscar_por_id(leer_int("ID: ", minimo=1))
+            print(producto if producto else "No encontrado.")
+
+        elif opcion == 5:
+            productos = inventario.listar_productos()
+            if not productos:
+                print("Inventario vacío.")
+            else:
+                for p in productos:
+                    print(p)
+
+        elif opcion == 6:
+            print("Saliendo...")
+            break
+
+        else:
+            print("Opción inválida.")
